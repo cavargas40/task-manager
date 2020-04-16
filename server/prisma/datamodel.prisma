@@ -1,0 +1,19 @@
+type Task {
+  id: ID! @id
+  createdAt: DateTime! @createdAt  
+  updatedAt: DateTime! @updatedAt
+  completionDate: DateTime!
+  description: String!
+  state: String!
+  author: User!
+  isDeleted: Boolean! @default(value: false)
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  password: String!
+  name: String!  
+  tasks: [Task!]!
+  isDeleted: Boolean! @default(value: false)
+}
