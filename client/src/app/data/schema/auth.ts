@@ -1,10 +1,11 @@
 import { User } from './user';
 
-export interface Login {
+export interface LoginSignUp {
   user: User;
   token: string;
 }
 
-export interface LoginResponse {
-  login: Login;
+export interface LoginSignUpResponse {
+  login: LoginSignUp;
+  signup: LoginSignUp;
 }

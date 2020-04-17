@@ -1,23 +1,65 @@
-<form>
-  <div class="form-group">
-    <label class="d-block">
-      <input type="text" class="form-control" [placeholder]="'Email'">
-    </label>
+<section class="register">
+  <div class="register__box">
+    <h1 class="heading-primary">Register</h1>
+    <div
+      class="register__error-message pointer"
+      [hidden]="!error"
+      (click)="error = null"
+    >
+      {{ error }}
+    </div>
+    <form class="form__element" (ngSubmit)="register()" [formGroup]="registerForm">
+      <div class="form__group">
+        <label for="name" class="form__label"> </label>
+        <input id="name" type="text" class="form__input" placeholder="Name" formControlName="name" />
+        <span class="form__error"
+          ><app-control-messages [control]="f['name']"></app-control-messages
+        ></span>
+      </div>
+
+      <div class="form__group">
+        <label for="email" class="form__label"> </label>
+        <input
+          id="email"
+          type="email"
+          class="form__input"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <span class="form__error"
+          ><app-control-messages [control]="f['email']"></app-control-messages
+        ></span>
+      </div>
+
+      <div class="form__group">
+        <label for="password" class="form__label"> </label>
+        <input
+          id="password"
+          type="password"
+          class="form__input"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span class="form__error"
+          ><app-control-messages
+            [control]="f['password']"
+          ></app-control-messages
+        ></span>
+      </div>
+
+      <div class="form__actions">
+        <button class="btn btn--secondary" type="submit" [disabled]="registerForm.invalid">
+          <span [hidden]="isLoading">Sign Up</span>
+          <span [hidden]="!isLoading">
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >hourglass_full</mat-icon
+            >
+          </span>
+        </button>
+      </div>
+      <a [routerLink]="['/auth/login']" class="btn-inline mt-medium"
+        >Got an account already? Log in here!</a
+      >
+    </form>
   </div>
-  <div class="form-group">
-    <label class="d-block">
-      <input type="text" class="form-control" [placeholder]="'Name'">
-    </label>
-  </div>
-  <div class="form-group">
-    <label class="d-block">
-      <input type="text" class="form-control" [placeholder]="'Password'">
-    </label>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary btn-block btn-raised" type="submit">
-      <span>Sign Up</span>
-    </button>
-  </div>
-  <a [routerLink]="['/auth/login']">Got an account already? Log in here!</a>
-</form>
+</section>

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Login } from 'app/data/schema/auth';
+import { LoginSignUp } from 'app/data/schema/auth';
 import { Router } from '@angular/router';
-import { LoginGQL } from 'app/modules/graphql/mutations/auth.mutation';
+import { LoginGQL, SignUpGQL } from 'app/modules/graphql/mutations/auth.mutation';
 import { map } from 'rxjs/operators';
 import { GraphQLCustom } from 'app/shared/abstract/graphql-custom';
 
+
 @Injectable({ providedIn: 'root' })
 export class AuthService extends GraphQLCustom {
-  constructor(private router: Router, private loginGQL: LoginGQL) {
+  constructor(private router: Router, private loginGQL: LoginGQL, private signUpGQL: SignUpGQL) {
     super();
   }
 
@@ -25,14 +26,22 @@ export class AuthService extends GraphQLCustom {
     this.redirectToLoginPage();
   }
 
-  setSession(login: Login) {
+  signUp(name: string, email: string, password: string) {
+    return this.signUpGQL
+      .mutate({
+        name,
+        email,
+        password
+      })
+      .pipe(map((res) => res.data.signup));
+  }
+
+  setSession(login: LoginSignUp) {
     localStorage.setItem('user', JSON.stringify({ ...login.user }));
     localStorage.setItem('token', JSON.stringify(login.token));
 
     if (login.token) {
       this.redirectToMainPage();
-    } else {
-      // this.logout();
     }
   }
 

@@ -1,0 +1,26 @@
+@import "~app/styles/abstracts/variables";
+@import "~app/styles/abstracts/mixins";
+
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 64px);
+  align-items: center;
+  justify-content: center;
+
+  &__box {
+    background-color: $color-grey-light-2;
+    padding: 12rem;
+    text-align: center;
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.7);
+  }
+
+  &__error-message {
+    font-size: 1.5rem;
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+}
