@@ -11,6 +11,9 @@ import { Apollo } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends GraphQLCustom {
+
+  private tokenExpirationTimer: any;
+
   constructor(
     private router: Router,
     private loginGQL: LoginGQL,
@@ -32,6 +35,7 @@ export class AuthService extends GraphQLCustom {
   logout() {
     localStorage.clear();
     this.apollo.getClient().resetStore();
+    this.clearLogoutTimer();
     this.redirectToLoginPage();
   }
 
@@ -71,4 +75,18 @@ export class AuthService extends GraphQLCustom {
   redirectToLoginPage() {
     this.router.navigate(['/login']);
   }
+
+  setLogoutTimer(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
+  clearLogoutTimer() {
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
+  }
+
 }

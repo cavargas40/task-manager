@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const modules = [
   LayoutModule,
@@ -14,6 +15,7 @@ const modules = [
   MatSidenavModule,
   MatIconModule,
   MatListModule,
+  DragDropModule,
 ];
 
 @NgModule({
