@@ -1,19 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
       <span>Task Manager</span>
       <span class="nav__spacer"></span>
       <a class="pointer nav__logout" *ngIf="isAuthenticated" (click)="addTask()">Add Task</a>
       <a class="pointer nav__logout" *ngIf="isAuthenticated" (click)="logout()">Logout</a>
       <span></span>
     </mat-toolbar>
-  </mat-sidenav-content>
 </mat-sidenav-container>

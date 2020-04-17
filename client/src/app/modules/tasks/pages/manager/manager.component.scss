@@ -4,13 +4,24 @@
 .tasks {
   padding: 2rem 12rem;
 
+  @include responsive(phone) {
+    padding: 2rem;
+  }
+
+
   &__lists-group {
     display: flex;
+
+    @include responsive(tab-port) {
+      flex-direction: column;
+    }
+
   }
 
   &__container {
     flex: 1 1 50%;
     margin: 1rem;
+
   }
 
   &__list {
