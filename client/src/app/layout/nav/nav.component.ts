@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from 'app/core/service/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskComponent } from 'app/shared/component/add-task/add-task.component';
 
 @Component({
   selector: 'app-nav',
@@ -18,7 +20,8 @@ export class NavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    public dialog: MatDialog) {}
 
   logout() {
     this.authService.logout();
@@ -26,6 +29,13 @@ export class NavComponent {
 
   get isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  addTask() {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      height: 'auto',
+      width: 'auto',
+    });
   }
 
 }

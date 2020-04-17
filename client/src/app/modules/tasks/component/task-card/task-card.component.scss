@@ -1,0 +1,18 @@
+@import "~app/styles/abstracts/variables";
+@import "~app/styles/abstracts/mixins";
+
+.task-card {
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__date {
+    color: rgba($color-primary, .7);
+  }
+
+  &__actions {
+    float: right;
+    margin-top: -3rem;
+    color: $color-primary;
+  }
+}

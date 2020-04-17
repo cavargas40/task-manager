@@ -21,24 +21,40 @@ export class TaskService {
   }
 
   createTask(description: string, completionDate: string) {
-    return this.createTaskGQL.mutate({
-      description,
-      completionDate,
-      state: 'pending',
-    });
+    return this.createTaskGQL.mutate(
+      {
+        description,
+        completionDate,
+        state: 'pending',
+      },
+      {
+        refetchQueries: [{ query: this.taskGQL.document }],
+      }
+    );
   }
 
   updateTaskState(id: string, state: string) {
-    return this.updateTaskStateGQL.mutate({
-      id,
-      state,
-    })
-    .pipe(map(res => res.data.updateTaskState));
+    return this.updateTaskStateGQL
+      .mutate(
+        {
+          id,
+          state,
+        },
+        {
+          refetchQueries: [{ query: this.taskGQL.document }],
+        }
+      )
+      .pipe(map((res) => res.data.updateTaskState));
   }
 
   deleteTask(id: string) {
-    return this.deleteTaskGQL.mutate({
-      id,
-    });
+    return this.deleteTaskGQL.mutate(
+      {
+        id,
+      },
+      {
+        refetchQueries: [{ query: this.taskGQL.document }],
+      }
+    );
   }
 }

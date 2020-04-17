@@ -1,0 +1,57 @@
+<section class="add-task">
+  <div class="add-task__box">
+    <h1 class="heading-primary">Add Task</h1>
+    <div
+      class="add-task__error-message pointer"
+      [hidden]="!error"
+      (click)="error = null"
+    >
+      {{ error }}
+    </div>
+
+    <form class="form__element" (ngSubmit)="add()" [formGroup]="addTaskForm">
+      <div class="form__group">
+        <label for="description" class="form__label"> </label>
+        <input
+          id="description"
+          type="description"
+          class="form__input"
+          placeholder="description"
+          formControlName="description"
+        />
+        <span class="form__error"
+          ><app-control-messages
+            [control]="f['description']"
+          ></app-control-messages
+        ></span>
+      </div>
+      <div class="form__group">
+        <label for="completionDate" class="form__label"> </label>
+        <input
+          id="completionDate"
+          type="completionDate"
+          class="form__input"
+          placeholder="Completion Date"
+          formControlName="completionDate"
+          [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+        />
+        <owl-date-time #dt1></owl-date-time>
+        <span class="form__error"
+          ><app-control-messages
+            [control]="f['completionDate']"
+          ></app-control-messages
+        ></span>
+      </div>
+      <div class="form__actions">
+        <button
+          type="submit"
+          class="btn btn--secondary"
+          type="submit"
+          [disabled]="addTaskForm.invalid"
+        >
+          ADD
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

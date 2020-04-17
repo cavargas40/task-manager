@@ -6,10 +6,12 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { ControlMessagesComponent } from './component/control-messages/control-messages.component';
 import { TaskGrouperPipe } from './pipe/task-grouper.pipe';
+import { AddTaskComponent } from './component/add-task/add-task.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
-  declarations: [ControlMessagesComponent, TaskGrouperPipe],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  exports: [MaterialModule, ControlMessagesComponent, FormsModule, ReactiveFormsModule, RouterModule, TaskGrouperPipe],
+  declarations: [ControlMessagesComponent, TaskGrouperPipe, AddTaskComponent],
+  imports: [CommonModule, OwlDateTimeModule, OwlNativeDateTimeModule, FormsModule, ReactiveFormsModule, RouterModule, MaterialModule],
+  exports: [MaterialModule, ControlMessagesComponent, FormsModule, ReactiveFormsModule, RouterModule, TaskGrouperPipe, AddTaskComponent],
 })
 export class SharedModule {}

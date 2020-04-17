@@ -11,6 +11,7 @@
       </button>
       <span>Task Manager</span>
       <span class="nav__spacer"></span>
+      <a class="pointer nav__logout" *ngIf="isAuthenticated" (click)="addTask()">Add Task</a>
       <a class="pointer nav__logout" *ngIf="isAuthenticated" (click)="logout()">Logout</a>
       <span></span>
     </mat-toolbar>

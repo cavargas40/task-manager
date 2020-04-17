@@ -1,0 +1,22 @@
+<section class="task-card">
+  <h4 class="task-card__title">{{ task?.description }}</h4>
+  <span class="task-card__date">
+    {{ task?.completionDate | date: "short" }}
+  </span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="task-card__actions" aria-label="Task Actions">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="changeState()">
+      <mat-icon>compare_arrows</mat-icon>
+      <span>Change state</span>
+    </button>
+    <button mat-menu-item (click)="deleteTask()">
+      <mat-icon>delete_forever</mat-icon>
+      <span>Delete Task</span>
+    </button>
+  </mat-menu>
+
+</section>

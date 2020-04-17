@@ -12,7 +12,8 @@ export class TaskGQL extends Query<TaskFetchResponse> {
       tasks {
         id,
         description,
-        state
+        state,
+        completionDate
       }
     }
   `;

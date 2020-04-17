@@ -9,7 +9,6 @@ import {
 import { TaskService } from 'app/data/service/task.service';
 import { Task } from 'app/data/schema/task';
 
-
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',

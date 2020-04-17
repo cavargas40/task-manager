@@ -1,5 +1,4 @@
 <section class="tasks">
-  <p></p>
   <div cdkDropListGroup class="tasks__lists-group">
     <div class="tasks__container">
       <h1 class="heading-primary">Pending</h1>
@@ -7,15 +6,20 @@
         cdkDropList
         [cdkDropListData]="pending"
         class="tasks__list"
-        (cdkDropListDropped)="drop($event, 'pending')">
-
+        (cdkDropListDropped)="drop($event, 'pending')"
+      >
         <ng-container *ngIf="pending.length">
-          <div class="tasks__box" *ngFor="let task of pending" cdkDrag [cdkDragData]="task">
-            {{task.description}}
+          <div
+            class="tasks__box"
+            *ngFor="let task of pending"
+            cdkDrag
+            [cdkDragData]="task"
+          >
+            <app-task-card [task]="task"></app-task-card>
           </div>
         </ng-container>
         <ng-container *ngIf="!pending.length">
-          <span class="tasks__empty">There are not pending tasks</span>
+          <span class="tasks__empty">There are no pending tasks</span>
         </ng-container>
       </div>
     </div>
@@ -26,11 +30,23 @@
         cdkDropList
         [cdkDropListData]="done"
         class="tasks__list"
-        (cdkDropListDropped)="drop($event, 'done')">
-        <div class="tasks__box" *ngFor="let task of done" cdkDrag [cdkDragData]="task">
-          {{task.description}}
-        </div>
+        (cdkDropListDropped)="drop($event, 'done')"
+      >
+        <ng-container *ngIf="done.length">
+          <div
+            class="tasks__box"
+            *ngFor="let task of done"
+            cdkDrag
+            [cdkDragData]="task"
+          >
+            <app-task-card [task]="task"></app-task-card>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!done.length">
+          <span class="tasks__empty">There are no done tasks</span>
+        </ng-container>
       </div>
     </div>
   </div>
+  <p>Advice: To change the state of the tasks, use the actions buttons to the right side of each task or drag & drop to the other column</p>
 </section>
