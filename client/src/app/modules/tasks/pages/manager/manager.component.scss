@@ -1,32 +1,45 @@
-.example-container {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 25px 25px 0;
-  display: inline-block;
-  vertical-align: top;
-}
+@import "~app/styles/abstracts/variables";
+@import "~app/styles/abstracts/mixins";
 
-.example-list {
-  border: solid 1px #ccc;
-  min-height: 60px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
-}
+.tasks {
+  padding: 8rem;
 
-.example-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  cursor: move;
-  background: white;
-  font-size: 14px;
+  &__lists-group {
+    display: flex;
+  }
+
+  &__container {
+    flex: 1 1 50%;
+    margin: 1rem;
+  }
+
+  &__list {
+    border: solid 1px $color-borders;
+    min-height: 6rem;
+    border-radius: .4rem;
+    overflow: hidden;
+    display: block;
+  }
+
+  &__box {
+    padding: 2rem;
+    border-bottom: solid 1px $color-borders;
+    color: $color-secondary;
+    cursor: move;
+    transition: all .2s;
+
+    &:hover {
+      //box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__empty {
+    display: block;
+    padding: 3rem;
+    font-size: 2rem;
+    color: $color-borders;
+    text-align: center;
+  }
 }
 
 .cdk-drag-preview {
@@ -45,9 +58,6 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.example-box:last-child {
-  border: none;
-}
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+
+import { TaskService } from 'app/data/service/task.service';
+import { Task } from 'app/data/schema/task';
+
 
 @Component({
   selector: 'app-manager',
@@ -11,16 +16,29 @@ import {
   styleUrls: ['./manager.component.scss'],
 })
 export class ManagerComponent implements OnInit {
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  pending: Array<Task> = [];
+  done: Array<Task> = [];
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  constructor(
+    private taskService: TaskService,
+    private snackBar: MatSnackBar
+  ) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.fetchTasks();
+  }
 
-  ngOnInit(): void {}
+  fetchTasks() {
+    this.taskService.fetchTasks().subscribe(
+      (tasks) => {
+        this.done = tasks.filter((task) => task.state === 'done');
+        this.pending = tasks.filter((task) => task.state === 'pending');
+      },
+      (error) => console.log(error)
+    );
+  }
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log('CdkDragDrop', event);
+  drop(event: CdkDragDrop<Array<Task>>, currentState: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -34,9 +52,23 @@ export class ManagerComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      this.updateTaskState(event.item.data.id, currentState);
     }
+  }
 
-    console.log(this.todo)
-    console.log(this.done)
+  updateTaskState(id: string, state: string) {
+    this.taskService.updateTaskState(id, state).subscribe((updateState) => {
+      if (state === updateState.state) {
+        this.snack(`Task state updated to ${state}`);
+      } else {
+        this.snack(`An error has ocurred updating the state to ${state}`);
+      }
+    });
+  }
+
+  snack(message, action = 'Dismiss', duration = 3000) {
+    this.snackBar.open(message, action, {
+      duration,
+    });
   }
 }

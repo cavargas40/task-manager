@@ -9,15 +9,8 @@ import { setContext } from 'apollo-link-context';
 const uri = ENV.graphqlServer;
 
 export function provideApollo(httpLink: HttpLink) {
-  const token = localStorage.getItem('token');
 
-  const auth = setContext((operation, context) => ({
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }));
-
-  const link = ApolloLink.from([auth, httpLink.create({ uri })]);
+  const link = ApolloLink.from([httpLink.create({ uri })]);
   const cache = new InMemoryCache();
 
   return {

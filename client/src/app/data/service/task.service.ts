@@ -32,7 +32,8 @@ export class TaskService {
     return this.updateTaskStateGQL.mutate({
       id,
       state,
-    });
+    })
+    .pipe(map(res => res.data.updateTaskState));
   }
 
   deleteTask(id: string) {

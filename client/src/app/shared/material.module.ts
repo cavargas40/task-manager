@@ -7,6 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   LayoutModule,
@@ -16,6 +17,7 @@ const modules = [
   MatIconModule,
   MatListModule,
   DragDropModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

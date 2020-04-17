@@ -1,26 +1,35 @@
 <section class="tasks">
-  <div cdkDropListGroup>
-    <div class="example-container">
-      <h2>To do</h2>
-
+  <p></p>
+  <div cdkDropListGroup class="tasks__lists-group">
+    <div class="tasks__container">
+      <h1 class="heading-primary">Pending</h1>
       <div
         cdkDropList
-        [cdkDropListData]="todo"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+        [cdkDropListData]="pending"
+        class="tasks__list"
+        (cdkDropListDropped)="drop($event, 'pending')">
+
+        <ng-container *ngIf="pending.length">
+          <div class="tasks__box" *ngFor="let task of pending" cdkDrag [cdkDragData]="task">
+            {{task.description}}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!pending.length">
+          <span class="tasks__empty">There are not pending tasks</span>
+        </ng-container>
       </div>
     </div>
 
-    <div class="example-container">
-      <h2>Done</h2>
-
+    <div class="tasks__container">
+      <h1 class="heading-primary">Done</h1>
       <div
         cdkDropList
         [cdkDropListData]="done"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+        class="tasks__list"
+        (cdkDropListDropped)="drop($event, 'done')">
+        <div class="tasks__box" *ngFor="let task of done" cdkDrag [cdkDragData]="task">
+          {{task.description}}
+        </div>
       </div>
     </div>
   </div>

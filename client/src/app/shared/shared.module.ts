@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material.module';
 import { ControlMessagesComponent } from './component/control-messages/control-messages.component';
+import { TaskGrouperPipe } from './pipe/task-grouper.pipe';
 
 @NgModule({
-  declarations: [ControlMessagesComponent],
+  declarations: [ControlMessagesComponent, TaskGrouperPipe],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  exports: [MaterialModule, ControlMessagesComponent, FormsModule, ReactiveFormsModule, RouterModule],
+  exports: [MaterialModule, ControlMessagesComponent, FormsModule, ReactiveFormsModule, RouterModule, TaskGrouperPipe],
 })
 export class SharedModule {}

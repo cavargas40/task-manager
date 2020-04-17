@@ -8,6 +8,7 @@ import {
 import { map } from 'rxjs/operators';
 import { GraphQLCustom } from 'app/shared/abstract/graphql-custom';
 import { Apollo } from 'apollo-angular';
+import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends GraphQLCustom {
@@ -32,11 +33,11 @@ export class AuthService extends GraphQLCustom {
       .pipe(map((res) => res.data.login));
   }
 
-  logout() {
-    localStorage.clear();
-    this.apollo.getClient().resetStore();
+  async logout() {
+    await this.apollo.getClient().resetStore();
     this.clearLogoutTimer();
     this.redirectToLoginPage();
+    localStorage.clear();
   }
 
   signUp(name: string, email: string, password: string) {
@@ -51,7 +52,7 @@ export class AuthService extends GraphQLCustom {
 
   setSession(login: LoginSignUp) {
     localStorage.setItem('user', JSON.stringify({ ...login.user }));
-    localStorage.setItem('token', JSON.stringify(login.token));
+    localStorage.setItem('token', JSON.stringify(login.token).replace('"', ''));
 
     if (login.token) {
       this.redirectToMainPage();
@@ -87,6 +88,17 @@ export class AuthService extends GraphQLCustom {
       clearTimeout(this.tokenExpirationTimer);
       this.tokenExpirationTimer = null;
     }
+  }
+
+  acquireToken(){
+    return new Observable<string>(subscriber => {
+      setTimeout(() => {
+        if(this.isAuthenticated()) {
+          subscriber.next(localStorage.getItem('token'))
+        }
+        localStorage.getItem('token')
+      }, 1000);
+    })
   }
 
 }

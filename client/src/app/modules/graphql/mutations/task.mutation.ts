@@ -32,7 +32,7 @@ export class CreateTaskGQL extends Mutation<crudTaskResponse> {
 export class UpdateTaskStateGQL extends Mutation<crudTaskResponse> {
   document = gql`
     mutation updateTaskState(
-      $id: String!
+      $id: ID!
       $state: String!
     ) {
       updateTaskState(
@@ -53,7 +53,7 @@ export class UpdateTaskStateGQL extends Mutation<crudTaskResponse> {
 export class DeleteTaskGQL extends Mutation<crudTaskResponse> {
   document = gql`
     mutation deleteTask(
-      $id: String!
+      $id: ID!
     ) {
       deleteTask(
         id: $id
