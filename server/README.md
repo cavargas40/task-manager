@@ -15,7 +15,7 @@ yarn install
 ```
 
 ## Development
-- All configurations are stored in `.env` file
+- All configurations are stored in `.env`, because this is a test project, is not required to copy the content of `.env.example` into `.env` 
 ##### To start the development server run:
 ```sh
 npm start
