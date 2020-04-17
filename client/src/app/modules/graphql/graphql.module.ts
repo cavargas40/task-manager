@@ -2,13 +2,27 @@ import { NgModule } from '@angular/core';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { environment as ENV } from 'environments/environment'
+import { environment as ENV } from 'environments/environment';
+import { ApolloLink } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
 
 const uri = ENV.graphqlServer;
-export function createApollo(httpLink: HttpLink) {
+
+export function provideApollo(httpLink: HttpLink) {
+  const token = localStorage.getItem('token');
+
+  const auth = setContext((operation, context) => ({
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }));
+
+  const link = ApolloLink.from([auth, httpLink.create({ uri })]);
+  const cache = new InMemoryCache();
+
   return {
-    link: httpLink.create({ uri }),
-    cache: new InMemoryCache(),
+    link,
+    cache,
   };
 }
 
@@ -17,7 +31,7 @@ export function createApollo(httpLink: HttpLink) {
   providers: [
     {
       provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
+      useFactory: provideApollo,
       deps: [HttpLink],
     },
   ],

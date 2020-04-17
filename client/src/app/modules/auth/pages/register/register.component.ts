@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
     this.authService.signUp(name, email, password).subscribe(
       (signup) => this.authService.setSession(signup),
       (error) => {
-        console.log(error);
         this.isLoading = false;
         const [errorDetailed] = error.graphQLErrors;
         this.error = errorDetailed.message;

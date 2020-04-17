@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { LoginSignUp } from 'app/data/schema/auth';
 import { Router } from '@angular/router';
-import { LoginGQL, SignUpGQL } from 'app/modules/graphql/mutations/auth.mutation';
+import {
+  LoginGQL,
+  SignUpGQL,
+} from 'app/modules/graphql/mutations/auth.mutation';
 import { map } from 'rxjs/operators';
 import { GraphQLCustom } from 'app/shared/abstract/graphql-custom';
-
+import { Apollo } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends GraphQLCustom {
-  constructor(private router: Router, private loginGQL: LoginGQL, private signUpGQL: SignUpGQL) {
+  constructor(
+    private router: Router,
+    private loginGQL: LoginGQL,
+    private signUpGQL: SignUpGQL,
+    private apollo: Apollo
+  ) {
     super();
   }
 
@@ -23,6 +31,7 @@ export class AuthService extends GraphQLCustom {
 
   logout() {
     localStorage.clear();
+    this.apollo.getClient().resetStore();
     this.redirectToLoginPage();
   }
 
@@ -31,7 +40,7 @@ export class AuthService extends GraphQLCustom {
       .mutate({
         name,
         email,
-        password
+        password,
       })
       .pipe(map((res) => res.data.signup));
   }
@@ -50,7 +59,6 @@ export class AuthService extends GraphQLCustom {
   }
 
   isAuthenticated(): boolean {
-    console.log('authenticated');
     return !['null', 'undefined', null, undefined].includes(
       localStorage.getItem('token')
     );
