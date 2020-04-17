@@ -24,7 +24,7 @@ yarn start
 ```
 
 ## Usage
-#### just open your favorite browser and open this url:
+#### just open your favorite browser and navigate to this url to open the GraphQL Playground:
 > http://localhost:4000
 
 
