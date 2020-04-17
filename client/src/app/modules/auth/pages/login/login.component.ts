@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from 'app/core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +12,18 @@ export class LoginComponent implements OnInit {
   isLoading: boolean;
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {
     this.buildForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.authService.redirectToMainPage();
+    }
+  }
 
   get f() {
     return this.loginForm.controls;
@@ -24,22 +31,22 @@ export class LoginComponent implements OnInit {
 
   private buildForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   login() {
     this.isLoading = true;
+    const { email, password } = this.loginForm.value;
 
-    const credentials = this.loginForm.value;
-
-    //   this.authService.login(credentials)
-    //     .pipe(
-    //       delay(5000),
-    //       tap(user => this.router.navigate(['/dashboard/home'])),
-    //       finalize(() => this.isLoading = false),
-    //       catchError(error => of(this.error = error))
-    //     ).subscribe();
+    this.authService.login(email, password).subscribe(
+      (login) => this.authService.setSession(login),
+      (error) => {
+        this.isLoading = false;
+        const [errorDetailed] = error.graphQLErrors;
+        this.error = errorDetailed.message;
+      }
+    );
   }
 }

@@ -1,0 +1,123 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: $default-font-size;
+
+    //change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    &:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+
+      &::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+      }
+    }
+  }
+
+  /* click */
+  &:active,
+  &:focus {
+    &:not(:disabled) {
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-secondary;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    animation-fill-mode: backwards;
+  }
+
+  &:disabled {
+    background-color: $color-grey-light-2;
+    transition: none;
+    cursor: not-allowed;
+    border: 1px solid $color-grey-dark;
+    color: rgba(0, 0, 0, 0.6);
+
+    &::after {
+      background-color: $color-grey-light-2;
+    }
+  }
+}
+
+
+.btn-inline {
+  text-decoration: none;
+  border: none;
+  color: $color-primary;
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  & span {
+    margin-left: 3px;
+    transition: margin-left 0.2s;
+  }
+
+  &:hover {
+    color: $color-grey-dark;
+
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  &:active {
+    animation: pulsate 1s infinite;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

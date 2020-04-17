@@ -7,15 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NavComponent } from './layout/nav/nav.component';
 import { SharedModule } from './shared/shared.module';
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { GraphQLModule } from './modules/graphql/graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, ContentLayoutComponent, NavComponent, AuthLayoutComponent],
+  declarations: [AppComponent, ContentLayoutComponent, NavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

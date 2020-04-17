@@ -1,17 +1,21 @@
-.sidenav-container {
-  height: 100%;
-}
+.nav {
+  &__spacer {
+    flex: 1 1 auto;
+  }
 
-.sidenav {
-  width: 200px;
-}
+  &__logout {
+    &,
+    &:link,
+    &:visited {
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: all .2s;
+    }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+    &:hover {
+      background-color: rgba(0,0,0, 0.3);
+    }
+  }
 }
