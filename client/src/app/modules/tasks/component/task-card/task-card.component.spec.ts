@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskCardComponent } from './task-card.component';
+import { TaskService } from 'app/data/service/task.service';
+import { ApolloTestingModule } from 'apollo-angular/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('TaskCardComponent', () => {
   let component: TaskCardComponent;
@@ -8,7 +12,9 @@ describe('TaskCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskCardComponent ]
+      declarations: [ TaskCardComponent ],
+      imports: [ApolloTestingModule, MatSnackBarModule, MatMenuModule],
+      providers: [TaskService]
     })
     .compileComponents();
   }));

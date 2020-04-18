@@ -8,6 +8,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NavComponent } from './nav.component';
+import { AuthService } from 'app/core/service/auth.service';
+
+import {
+  ApolloTestingModule,
+} from 'apollo-angular/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -24,7 +31,11 @@ describe('NavComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-      ]
+        RouterTestingModule,
+        ApolloTestingModule,
+        MatDialogModule
+      ],
+      providers: [AuthService],
     }).compileComponents();
   }));
 

@@ -23,6 +23,12 @@ npm start
 yarn start
 ```
 
+## Testing
+- To run the tests just execute the next command
+```sh
+npm run test
+```
+
 ## Usage
 #### just open your favorite browser and navigate to this url to open the GraphQL Playground:
 > http://localhost:4000

@@ -1,27 +1,32 @@
-# Client
+# Tasks Manager Client
+![](https://img.shields.io/badge/task--manager--client-build-green.svg)
+![](https://img.shields.io/badge/node.js-v13.7.*-blue.svg) 
+![](https://img.shields.io/badge/npm-v6.13.*-blue.svg)
+![](https://img.shields.io/badge/yarn-v1.2.*-blue.svg)
+![](https://img.shields.io/badge/angular--cli-v9.1.*-orange.svg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+### Ng Client using GraphQL Server for ZagaLabs Test
 
-## Development server
+## Dependencies
+##### To install dependencies run:
+```sh
+npm install
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Development
+- All configurations are stored in `environments/environment` 
+##### To start the development server run:
+```sh
+ng serve -o
+```
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Usage
+#### just open your favorite browser and navigate to this url to open the Angular App:
+> http://localhost:4200
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Author
+> Carlos Andres Vargas Lopez | <https://www.cavargas.com/> | <cavargas40@gmail.com>

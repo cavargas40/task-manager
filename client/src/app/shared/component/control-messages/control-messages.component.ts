@@ -19,16 +19,18 @@ export class ControlMessagesComponent implements OnInit {
   ngOnInit(): void {}
 
   get errorMessage(): boolean {
-    for (const propertyName in this.control.errors) {
-      if (
-        this.control.errors.hasOwnProperty(propertyName) &&
-        this.control.touched
-      ) {
-        return ValidationService.getValidationErrorMessage(
-          propertyName,
-          this.control.errors[propertyName],
-          this.labelName
-        );
+    if (this.control && this.control.errors) {
+      for (const propertyName in this.control.errors) {
+        if (
+          this.control.errors.hasOwnProperty(propertyName) &&
+          this.control.touched
+        ) {
+          return ValidationService.getValidationErrorMessage(
+            propertyName,
+            this.control.errors[propertyName],
+            this.labelName
+          );
+        }
       }
     }
 
