@@ -34,5 +34,13 @@ npm run test
 > http://localhost:4000
 
 
+## Docker Image
+#### If you dont want to run a development local server, just execute this command to download the docker image(Docker Required):
+> docker pull cavargas40/task-manager-server:v1.0.1
+
+### after the pull image run it in the root of the project with the command:
+> docker run --env-file=.env --name task-manager-server -p 4000:4000 -d cavargas40/task-manager-server:v1.0.1
+
+
 ## Author
 > Carlos Andres Vargas Lopez | <https://www.cavargas.com/> | <cavargas40@gmail.com>
