@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Query } from 'apollo-angular';
+import { Query, Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { TaskFetchResponse } from 'app/data/schema/task';
 
@@ -7,6 +7,11 @@ import { TaskFetchResponse } from 'app/data/schema/task';
   providedIn: 'root',
 })
 export class TaskGQL extends Query<TaskFetchResponse> {
+
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
     query {
       tasks {

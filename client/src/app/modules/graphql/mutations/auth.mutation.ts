@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Mutation } from 'apollo-angular';
+import { Mutation, Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { LoginSignUpResponse } from 'app/data/schema/auth';
 
@@ -7,6 +7,10 @@ import { LoginSignUpResponse } from 'app/data/schema/auth';
   providedIn: 'root',
 })
 export class LoginGQL extends Mutation<LoginSignUpResponse> {
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
     mutation login($email: String!, $password: String!) {
       login(email: $email, password: $password) {
@@ -25,6 +29,10 @@ export class LoginGQL extends Mutation<LoginSignUpResponse> {
   providedIn: 'root',
 })
 export class SignUpGQL extends Mutation<LoginSignUpResponse> {
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
     mutation signup($name: String!, $email: String!, $password: String!) {
       signup(name: $name, email: $email, password: $password) {

@@ -12,7 +12,6 @@ import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends GraphQLCustom {
-
   private tokenExpirationTimer: any;
 
   constructor(
@@ -33,7 +32,7 @@ export class AuthService extends GraphQLCustom {
       .pipe(map((res) => res.data.login));
   }
 
-  async logout() {
+  async logout(): Promise<any> {
     await this.apollo.getClient().resetStore();
     this.clearLogoutTimer();
     this.redirectToLoginPage();
@@ -52,7 +51,10 @@ export class AuthService extends GraphQLCustom {
 
   setSession(login: LoginSignUp) {
     localStorage.setItem('user', JSON.stringify({ ...login.user }));
-    localStorage.setItem('token', JSON.stringify(login.token).replace('"', ''));
+    localStorage.setItem(
+      'token',
+      (JSON.stringify(login.token) || '').replace('"', '')
+    );
 
     if (login.token) {
       this.redirectToMainPage();
@@ -89,16 +91,4 @@ export class AuthService extends GraphQLCustom {
       this.tokenExpirationTimer = null;
     }
   }
-
-  acquireToken(){
-    return new Observable<string>(subscriber => {
-      setTimeout(() => {
-        if(this.isAuthenticated()) {
-          subscriber.next(localStorage.getItem('token'))
-        }
-        localStorage.getItem('token')
-      }, 1000);
-    })
-  }
-
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Mutation } from 'apollo-angular';
+import { Mutation, Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { crudTaskResponse } from 'app/data/schema/task';
 
@@ -7,6 +7,10 @@ import { crudTaskResponse } from 'app/data/schema/task';
   providedIn: 'root',
 })
 export class CreateTaskGQL extends Mutation<crudTaskResponse> {
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
     mutation createTask(
       $description: String!
@@ -30,15 +34,13 @@ export class CreateTaskGQL extends Mutation<crudTaskResponse> {
   providedIn: 'root',
 })
 export class UpdateTaskStateGQL extends Mutation<crudTaskResponse> {
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
-    mutation updateTaskState(
-      $id: ID!
-      $state: String!
-    ) {
-      updateTaskState(
-        id: $id
-        state: $state
-      ) {
+    mutation updateTaskState($id: ID!, $state: String!) {
+      updateTaskState(id: $id, state: $state) {
         id
         description
         state
@@ -51,17 +53,15 @@ export class UpdateTaskStateGQL extends Mutation<crudTaskResponse> {
   providedIn: 'root',
 })
 export class DeleteTaskGQL extends Mutation<crudTaskResponse> {
+  constructor(apollo: Apollo) {
+    super(apollo);
+  }
+
   document = gql`
-    mutation deleteTask(
-      $id: ID!
-    ) {
-      deleteTask(
-        id: $id
-      ) {
+    mutation deleteTask($id: ID!) {
+      deleteTask(id: $id) {
         isDeleted
       }
     }
   `;
 }
-
-

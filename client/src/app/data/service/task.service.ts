@@ -6,6 +6,7 @@ import {
   DeleteTaskGQL,
 } from 'app/modules/graphql/mutations/task.mutation';
 import { map } from 'rxjs/operators';
+import { Apollo } from 'apollo-angular';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -21,16 +22,18 @@ export class TaskService {
   }
 
   createTask(description: string, completionDate: string) {
-    return this.createTaskGQL.mutate(
-      {
-        description,
-        completionDate,
-        state: 'pending',
-      },
-      {
-        refetchQueries: [{ query: this.taskGQL.document }],
-      }
-    );
+    return this.createTaskGQL
+      .mutate(
+        {
+          description,
+          completionDate,
+          state: 'pending',
+        },
+        {
+          refetchQueries: [{ query: this.taskGQL.document }],
+        }
+      )
+      .pipe(map((res) => res.data.createTask));
   }
 
   updateTaskState(id: string, state: string) {
@@ -48,13 +51,15 @@ export class TaskService {
   }
 
   deleteTask(id: string) {
-    return this.deleteTaskGQL.mutate(
-      {
-        id,
-      },
-      {
-        refetchQueries: [{ query: this.taskGQL.document }],
-      }
-    );
+    return this.deleteTaskGQL
+      .mutate(
+        {
+          id,
+        },
+        {
+          refetchQueries: [{ query: this.taskGQL.document }],
+        }
+      )
+      .pipe(map((res) => res.data.deleteTask));
   }
 }
