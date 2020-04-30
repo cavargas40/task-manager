@@ -40,13 +40,13 @@ export class AddTaskComponent implements OnInit {
     this.isLoading = true;
     const { description, completionDate } = this.addTaskForm.value;
 
-    this.taskService.createTask(description, completionDate).subscribe(
-      (res) => {
+    this.taskService
+      .createTask(description, completionDate)
+      .subscribe((res) => {
         this.snack('Task created succesfully');
+        this.isLoading = false;
         this.dialogRef.close();
-      },
-      (error) => console.log(error)
-    );
+      });
   }
 
   snack(message, action = 'Dismiss', duration = 3000) {

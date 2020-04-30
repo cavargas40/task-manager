@@ -6,12 +6,10 @@ import {
   SignUpGQL,
 } from 'app/modules/graphql/mutations/auth.mutation';
 import { map } from 'rxjs/operators';
-import { GraphQLCustom } from 'app/shared/abstract/graphql-custom';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService extends GraphQLCustom {
+export class AuthService {
   private tokenExpirationTimer: any;
 
   constructor(
@@ -19,9 +17,7 @@ export class AuthService extends GraphQLCustom {
     private loginGQL: LoginGQL,
     private signUpGQL: SignUpGQL,
     private apollo: Apollo
-  ) {
-    super();
-  }
+  ) {}
 
   login(email: string, password: string) {
     return this.loginGQL

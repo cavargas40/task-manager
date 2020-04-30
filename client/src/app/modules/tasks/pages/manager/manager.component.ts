@@ -56,12 +56,8 @@ export class ManagerComponent implements OnInit {
   }
 
   updateTaskState(id: string, state: string) {
-    this.taskService.updateTaskState(id, state).subscribe((updateState) => {
-      if (state === updateState.state) {
-        this.snack(`Task state updated to ${state}`);
-      } else {
-        this.snack(`An error has ocurred updating the state to ${state}`);
-      }
+    this.taskService.updateTaskState(id, state).subscribe(() => {
+      this.snack(`Task state updated to ${state}`);
     });
   }
 

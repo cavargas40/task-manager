@@ -22,13 +22,13 @@ export class TaskCardComponent implements OnInit {
     const nextstate = this.task.state === 'pending' ? 'done' : 'pending';
     this.taskService
       .updateTaskState(this.task.id, nextstate)
-      .subscribe((res) => this.snack(`Task state updated to ${nextstate}`));
+      .subscribe(() => this.snack(`Task state updated to ${nextstate}`));
   }
 
   deleteTask() {
     this.taskService
       .deleteTask(this.task.id)
-      .subscribe((res) => this.snack(`Task deleted succesfully`));
+      .subscribe(() => this.snack(`Task deleted succesfully`));
   }
 
   snack(message, action = 'Dismiss', duration = 3000) {
