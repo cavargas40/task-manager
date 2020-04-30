@@ -1,16 +1,18 @@
 import { TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { TaskService } from './task.service';
 import {
   ApolloTestingModule,
   ApolloTestingController,
 } from 'apollo-angular/testing';
+
 import { TaskGQL } from 'app/modules/graphql/queries/tasks.query';
 import {
   CreateTaskGQL,
   UpdateTaskStateGQL,
   DeleteTaskGQL,
 } from 'app/modules/graphql/mutations/task.mutation';
+import { TaskService } from './task.service';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -19,6 +21,7 @@ describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ApolloTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     service = TestBed.inject(TaskService);
 

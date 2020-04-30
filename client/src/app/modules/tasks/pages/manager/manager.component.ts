@@ -28,13 +28,10 @@ export class ManagerComponent implements OnInit {
   }
 
   fetchTasks() {
-    this.taskService.fetchTasks().subscribe(
-      (tasks) => {
-        this.done = tasks.filter((task) => task.state === 'done');
-        this.pending = tasks.filter((task) => task.state === 'pending');
-      },
-      (error) => console.log(error)
-    );
+    this.taskService.fetchTasks().subscribe((tasks) => {
+      this.done = tasks.filter((task) => task.state === 'done');
+      this.pending = tasks.filter((task) => task.state === 'pending');
+    });
   }
 
   drop(event: CdkDragDrop<Array<Task>>, currentState: string) {

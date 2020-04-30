@@ -2,14 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-
-import { LoginComponent } from './login.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { ApolloTestingModule } from 'apollo-angular/testing';
-import { AuthService } from 'app/core/service/auth.service';
 import { of, throwError } from 'rxjs';
 import { ApolloError } from 'apollo-client';
 import { GraphQLError } from 'graphql';
+
+import { AuthService } from 'app/core/service/auth.service';
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -50,6 +52,7 @@ describe('LoginComponent', () => {
           useValue: AuthServiceStub,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

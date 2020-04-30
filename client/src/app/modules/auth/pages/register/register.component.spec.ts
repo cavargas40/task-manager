@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RegisterComponent } from './register.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -8,11 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { ApolloTestingModule } from 'apollo-angular/testing';
-import { AuthService } from 'app/core/service/auth.service';
 import { of, throwError } from 'rxjs';
 import { ApolloError } from 'apollo-client';
 import { GraphQLError } from 'graphql';
+
+import { RegisterComponent } from './register.component';
+import { AuthService } from 'app/core/service/auth.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -53,6 +55,7 @@ describe('RegisterComponent', () => {
           useValue: AuthServiceStub,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

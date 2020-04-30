@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { LoginSignUp } from 'app/data/schema/auth';
 import { Router } from '@angular/router';
 import {
@@ -16,7 +16,8 @@ export class AuthService {
     private router: Router,
     private loginGQL: LoginGQL,
     private signUpGQL: SignUpGQL,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private ngZone: NgZone
   ) {}
 
   login(email: string, password: string) {
@@ -68,11 +69,11 @@ export class AuthService {
   }
 
   redirectToMainPage() {
-    this.router.navigate(['/tasks']);
+    this.ngZone.run(() => this.router.navigate(['/tasks'])).then();
   }
 
   redirectToLoginPage() {
-    this.router.navigate(['/login']);
+    this.ngZone.run(() => this.router.navigate(['/login'])).then();
   }
 
   setLogoutTimer(expirationDuration: number) {

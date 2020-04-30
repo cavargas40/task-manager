@@ -1,16 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ManagerComponent } from './manager.component';
-import { ApolloTestingModule } from 'apollo-angular/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { TaskService } from 'app/data/service/task.service';
+
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { of, throwError } from 'rxjs';
+
 import {
   DragDropEventFactory,
   ContainerModel,
 } from 'app/shared/test/drag-drop-event-factory';
+import { ManagerComponent } from './manager.component';
+import { TaskService } from 'app/data/service/task.service';
 import { Task } from 'app/data/schema/task';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ManagerComponent', () => {
   const dragDropEventFactory = new DragDropEventFactory<Task>();
@@ -51,13 +53,18 @@ describe('ManagerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ManagerComponent],
-      imports: [ApolloTestingModule, MatSnackBarModule, BrowserAnimationsModule],
+      imports: [
+        ApolloTestingModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         {
           provide: TaskService,
           useValue: TaskServiceStub,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -92,8 +99,6 @@ describe('ManagerComponent', () => {
 
     expect(service.fetchTasks).toHaveBeenCalled();
   });
-
-
 
   it('should test drag & drop functionality', () => {
     const service = TestBed.inject(TaskService);

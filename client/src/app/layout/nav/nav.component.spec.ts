@@ -1,20 +1,21 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { ApolloTestingModule } from 'apollo-angular/testing';
+import { Observable } from 'apollo-link';
+import { of } from 'rxjs';
 
 import { NavComponent } from './nav.component';
 import { AuthService } from 'app/core/service/auth.service';
-
-import { ApolloTestingModule } from 'apollo-angular/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
-import { Observable } from 'apollo-link';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -60,6 +61,7 @@ describe('NavComponent', () => {
           useClass: MdDialogMock,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

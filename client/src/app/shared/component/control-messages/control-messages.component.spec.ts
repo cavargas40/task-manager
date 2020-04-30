@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { ControlMessagesComponent } from './control-messages.component';
-import { FormControl, Validators } from '@angular/forms';
 
 describe('ControlMessagesComponent', () => {
   let component: ControlMessagesComponent;
@@ -10,6 +11,7 @@ describe('ControlMessagesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ControlMessagesComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

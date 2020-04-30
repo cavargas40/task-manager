@@ -1,17 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
   ApolloTestingModule,
   ApolloTestingController,
 } from 'apollo-angular/testing';
 
-import { AuthService } from './auth.service';
+import { LoginComponent } from 'app/modules/auth/pages/login/login.component';
+import { ManagerComponent } from 'app/modules/tasks/pages/manager/manager.component';
 import {
   LoginGQL,
   SignUpGQL,
 } from 'app/modules/graphql/mutations/auth.mutation';
-
+import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -19,7 +21,14 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ApolloTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'login', component: LoginComponent },
+          { path: 'tasks', component: ManagerComponent },
+        ]),
+        ApolloTestingModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     service = TestBed.inject(AuthService);
 

@@ -1,11 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TaskCardComponent } from './task-card.component';
-import { TaskService } from 'app/data/service/task.service';
-import { ApolloTestingModule } from 'apollo-angular/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { of } from 'rxjs';
+
+import { TaskService } from 'app/data/service/task.service';
+import { TaskCardComponent } from './task-card.component';
 
 describe('TaskCardComponent', () => {
   let component: TaskCardComponent;
@@ -43,6 +45,7 @@ describe('TaskCardComponent', () => {
           useClass: MatSnackBarMock,
         },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

@@ -1,6 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AddTaskComponent } from './add-task.component';
 import {
   ReactiveFormsModule,
   FormsModule,
@@ -8,12 +6,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { ApolloTestingModule } from 'apollo-angular/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { TaskService } from 'app/data/service/task.service';
+
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { of } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AddTaskComponent } from './add-task.component';
+import { TaskService } from 'app/data/service/task.service';
 
 describe('AddTaskComponent', () => {
   let component: AddTaskComponent;
@@ -53,6 +55,7 @@ describe('AddTaskComponent', () => {
           },
         ],
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
